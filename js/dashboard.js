@@ -648,36 +648,46 @@ const Dashboard = (() => {
   }
 
   // ─── Terapis Management Methods ───────────────────────────────────────────
-  function addTerapis() {
+  async function addTerapis() {
     const name = prompt('Masukkan nama terapis baru:');
     if (name && name.trim()) {
       if (!window.GFP_TERAPIS) window.GFP_TERAPIS = [];
       window.GFP_TERAPIS.push(name.trim());
-      localStorage.setItem('gfp_terapis', JSON.stringify(window.GFP_TERAPIS));
-      window.GFP_Toast?.show('Terapis berhasil ditambahkan', 'success', 'Berhasil');
+      
+      const btn = document.activeElement;
+      if (btn) btn.classList.add('loading');
+      
+      await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
+      
+      if (btn) btn.classList.remove('loading');
+      window.GFP_Toast?.show('Terapis berhasil ditambahkan ke Cloud', 'success', 'Berhasil');
       switchSubView('pengaturan');
     }
   }
 
-  function editTerapis(index) {
+  async function editTerapis(index) {
     if (!window.GFP_TERAPIS || !window.GFP_TERAPIS[index]) return;
     const currentName = window.GFP_TERAPIS[index];
     const newName = prompt('Edit nama terapis:', currentName);
     if (newName && newName.trim() && newName.trim() !== currentName) {
       window.GFP_TERAPIS[index] = newName.trim();
-      localStorage.setItem('gfp_terapis', JSON.stringify(window.GFP_TERAPIS));
-      window.GFP_Toast?.show('Nama terapis diperbarui', 'success', 'Tersimpan');
+      
+      await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
+      
+      window.GFP_Toast?.show('Nama terapis diperbarui di Cloud', 'success', 'Tersimpan');
       switchSubView('pengaturan');
     }
   }
 
-  function deleteTerapis(index) {
+  async function deleteTerapis(index) {
     if (!window.GFP_TERAPIS || !window.GFP_TERAPIS[index]) return;
     const currentName = window.GFP_TERAPIS[index];
     if (confirm(`Apakah Anda yakin ingin menghapus "${currentName}" dari daftar terapis?`)) {
       window.GFP_TERAPIS.splice(index, 1);
-      localStorage.setItem('gfp_terapis', JSON.stringify(window.GFP_TERAPIS));
-      window.GFP_Toast?.show('Terapis dihapus', 'success', 'Dihapus');
+      
+      await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
+      
+      window.GFP_Toast?.show('Terapis dihapus dari Cloud', 'success', 'Dihapus');
       switchSubView('pengaturan');
     }
   }
@@ -1022,6 +1032,16 @@ const Dashboard = (() => {
     });
 
     renderDashboardHome();
+
+    // Fetch data from server
+    window.GFP_UTILS?.syncServer?.('get_data').then(serverData => {
+      if (serverData && serverData.success && serverData.data?.terapis) {
+        if (serverData.data.terapis.length > 0) {
+          window.GFP_TERAPIS = serverData.data.terapis;
+          if (currentSubView === 'pengaturan') switchSubView('pengaturan');
+        }
+      }
+    });
   }
 
   return { 

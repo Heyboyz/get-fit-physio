@@ -132,6 +132,7 @@ const FormModule = (() => {
   function buildPayload(formData) {
     const id = window.GFP_UTILS?.generatePatientId?.() || 'GFP-NEW';
     return {
+      action:          'add_patient',
       patient_id:      id,
       tanggal_input:   window.GFP_UTILS?.todayStr?.() || new Date().toISOString().split('T')[0],
       nama_pasien:     formData.nama_pasien,

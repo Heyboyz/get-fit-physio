@@ -53,13 +53,6 @@ const default_TERAPIS = [
   'Rizky Pratama, S.Ft',
 ];
 let TERAPIS_LIST = default_TERAPIS;
-try {
-  const savedTerapis = localStorage.getItem('gfp_terapis');
-  if (savedTerapis) {
-    const parsed = JSON.parse(savedTerapis);
-    if (Array.isArray(parsed)) TERAPIS_LIST = parsed;
-  }
-} catch(e) {}
 
 // ─── Hari Options ─────────────────────────────────────────────────────────────
 const HARI_OPTIONS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
@@ -328,6 +321,24 @@ function todayStr() {
   return new Date().toISOString().split('T')[0];
 }
 
+// ─── Server Sync Helper ──────────────────────────────────────────────────────
+async function syncServer(action, payload = null) {
+  const endpoint = CONFIG.FORM_ENDPOINT;
+  if (!endpoint) return null;
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, payload })
+    });
+    const data = await res.json();
+    return data;
+  } catch(e) {
+    console.error('Server sync failed:', e);
+    return null;
+  }
+}
+
 // ─── Helper: Initials from name ───────────────────────────────────────────────
 function getInitials(name) {
   return name
@@ -358,4 +369,5 @@ window.GFP_UTILS   = {
   formatDate,
   todayStr,
   getInitials,
+  syncServer,
 };
