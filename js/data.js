@@ -5,8 +5,7 @@
 
 // ─── Configuration (swap these for real endpoints) ───────────────────────────
 const CONFIG = {
-  FORM_ENDPOINT:      '', // e.g. Google Form POST URL or Antigravity webhook
-  INTEGRATION_SECRET: '', // e.g. Secret key to match Apps Script INTEGRATION_SECRET
+  FORM_ENDPOINT:      '/api/submit', // Cloudflare Pages Function Proxy
   DATA_SOURCE_URL:    '', // e.g. Google Sheets JSON endpoint
   CALENDAR_WEBHOOK:   '', // e.g. Apps Script calendar webhook
   REMINDER_WEBHOOK:   '', // e.g. Apps Script Gmail/WhatsApp webhook

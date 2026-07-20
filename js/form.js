@@ -132,7 +132,6 @@ const FormModule = (() => {
   function buildPayload(formData) {
     const id = window.GFP_UTILS?.generatePatientId?.() || 'GFP-NEW';
     return {
-      integrationKey:  window.GFP_CONFIG?.INTEGRATION_SECRET || '',
       patient_id:      id,
       tanggal_input:   window.GFP_UTILS?.todayStr?.() || new Date().toISOString().split('T')[0],
       nama_pasien:     formData.nama_pasien,
@@ -163,8 +162,7 @@ const FormModule = (() => {
 
     const res = await fetch(endpoint, {
       method:  'POST',
-      // Menggunakan text/plain agar tidak memicu CORS preflight (OPTIONS) dari Google Apps Script
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(payload),
     });
     if (!res.ok) throw new Error('Gagal mengirim data. Coba lagi.');
