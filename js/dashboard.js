@@ -657,11 +657,16 @@ const Dashboard = (() => {
       const btn = document.activeElement;
       if (btn) btn.classList.add('loading');
       
-      await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
-      
+      const res = await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
       if (btn) btn.classList.remove('loading');
-      window.GFP_Toast?.show('Terapis berhasil ditambahkan ke Cloud', 'success', 'Berhasil');
-      switchSubView('pengaturan');
+      
+      if (res && res.success) {
+        window.GFP_Toast?.show('Terapis berhasil ditambahkan ke Cloud', 'success', 'Berhasil');
+        switchSubView('pengaturan');
+      } else {
+        window.GFP_Toast?.show('Gagal menyimpan ke Cloud. Pastikan URL Apps Script & Secret benar.', 'error', 'Gagal');
+        window.GFP_TERAPIS.pop(); // Revert
+      }
     }
   }
 
@@ -672,10 +677,15 @@ const Dashboard = (() => {
     if (newName && newName.trim() && newName.trim() !== currentName) {
       window.GFP_TERAPIS[index] = newName.trim();
       
-      await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
+      const res = await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
       
-      window.GFP_Toast?.show('Nama terapis diperbarui di Cloud', 'success', 'Tersimpan');
-      switchSubView('pengaturan');
+      if (res && res.success) {
+        window.GFP_Toast?.show('Nama terapis diperbarui di Cloud', 'success', 'Tersimpan');
+        switchSubView('pengaturan');
+      } else {
+        window.GFP_Toast?.show('Gagal menyimpan ke Cloud.', 'error', 'Gagal');
+        window.GFP_TERAPIS[index] = currentName; // Revert
+      }
     }
   }
 
@@ -685,10 +695,15 @@ const Dashboard = (() => {
     if (confirm(`Apakah Anda yakin ingin menghapus "${currentName}" dari daftar terapis?`)) {
       window.GFP_TERAPIS.splice(index, 1);
       
-      await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
+      const res = await window.GFP_UTILS?.syncServer?.('save_terapis', window.GFP_TERAPIS);
       
-      window.GFP_Toast?.show('Terapis dihapus dari Cloud', 'success', 'Dihapus');
-      switchSubView('pengaturan');
+      if (res && res.success) {
+        window.GFP_Toast?.show('Terapis dihapus dari Cloud', 'success', 'Dihapus');
+        switchSubView('pengaturan');
+      } else {
+        window.GFP_Toast?.show('Gagal menghapus di Cloud.', 'error', 'Gagal');
+        window.GFP_TERAPIS.splice(index, 0, currentName); // Revert
+      }
     }
   }
 
