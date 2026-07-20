@@ -46,12 +46,20 @@ const LAYANAN_OPTIONS = [
 ];
 
 // ─── Terapis Options ──────────────────────────────────────────────────────────
-const TERAPIS_LIST = [
+const default_TERAPIS = [
   'Dewi Rahayu, S.Ft',
   'Ahmad Fauzi, S.Ft',
   'Siti Nurhaliza, S.Ft',
   'Rizky Pratama, S.Ft',
 ];
+let TERAPIS_LIST = default_TERAPIS;
+try {
+  const savedTerapis = localStorage.getItem('gfp_terapis');
+  if (savedTerapis) {
+    const parsed = JSON.parse(savedTerapis);
+    if (Array.isArray(parsed)) TERAPIS_LIST = parsed;
+  }
+} catch(e) {}
 
 // ─── Hari Options ─────────────────────────────────────────────────────────────
 const HARI_OPTIONS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];

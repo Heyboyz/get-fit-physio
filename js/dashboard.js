@@ -653,6 +653,7 @@ const Dashboard = (() => {
     if (name && name.trim()) {
       if (!window.GFP_TERAPIS) window.GFP_TERAPIS = [];
       window.GFP_TERAPIS.push(name.trim());
+      localStorage.setItem('gfp_terapis', JSON.stringify(window.GFP_TERAPIS));
       window.GFP_Toast?.show('Terapis berhasil ditambahkan', 'success', 'Berhasil');
       switchSubView('pengaturan');
     }
@@ -664,6 +665,7 @@ const Dashboard = (() => {
     const newName = prompt('Edit nama terapis:', currentName);
     if (newName && newName.trim() && newName.trim() !== currentName) {
       window.GFP_TERAPIS[index] = newName.trim();
+      localStorage.setItem('gfp_terapis', JSON.stringify(window.GFP_TERAPIS));
       window.GFP_Toast?.show('Nama terapis diperbarui', 'success', 'Tersimpan');
       switchSubView('pengaturan');
     }
@@ -674,6 +676,7 @@ const Dashboard = (() => {
     const currentName = window.GFP_TERAPIS[index];
     if (confirm(`Apakah Anda yakin ingin menghapus "${currentName}" dari daftar terapis?`)) {
       window.GFP_TERAPIS.splice(index, 1);
+      localStorage.setItem('gfp_terapis', JSON.stringify(window.GFP_TERAPIS));
       window.GFP_Toast?.show('Terapis dihapus', 'success', 'Dihapus');
       switchSubView('pengaturan');
     }
