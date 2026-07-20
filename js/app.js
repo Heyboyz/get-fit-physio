@@ -117,10 +117,7 @@ const App = (() => {
           </div>
         </div>
 
-        <div class="alert alert-info" style="margin-bottom:var(--space-5);font-size:var(--text-xs);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1rem;height:1rem;flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          <div><strong>Demo:</strong> admin@getfitphysio.com / admin123</div>
-        </div>
+
 
         <form id="login-form" novalidate>
           <div style="display:flex;flex-direction:column;gap:var(--space-4);margin-bottom:var(--space-5);">
@@ -130,9 +127,8 @@ const App = (() => {
                 id="login-email"
                 class="form-control"
                 type="email"
-                placeholder="admin@getfitphysio.com"
+                placeholder="Masukkan email"
                 autocomplete="email"
-                value="admin@getfitphysio.com"
               >
               <div id="login-email-err" class="form-error-msg"></div>
             </div>
@@ -145,7 +141,6 @@ const App = (() => {
                   type="password"
                   placeholder="Masukkan password"
                   autocomplete="current-password"
-                  value="admin123"
                 >
                 <button type="button" id="toggle-password" style="position:absolute;right:var(--space-3);top:50%;transform:translateY(-50%);color:var(--color-text-muted);background:none;border:none;cursor:pointer;">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1rem;height:1rem;">
