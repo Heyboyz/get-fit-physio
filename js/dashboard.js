@@ -27,6 +27,7 @@ const Dashboard = (() => {
     refresh: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>`,
     save: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>`,
     logout: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`,
+    trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>`,
   };
 
   function icon(name, cls = '') {
@@ -591,6 +592,38 @@ const Dashboard = (() => {
           </div>
         </div>
         <div class="settings-section">
+          <div class="settings-section-title" style="display:flex;justify-content:space-between;align-items:center;">
+            Manajemen Terapis
+            <button class="btn btn-primary btn-sm" onclick="GFP_Dashboard.addTerapis()">
+              ${icon('plus','sidebar-nav-icon')} Tambah Terapis
+            </button>
+          </div>
+          <div class="card" style="display:flex;flex-direction:column;gap:var(--space-4);">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nama Terapis</th>
+                  <th style="width:100px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(window.GFP_TERAPIS||[]).map((t, idx) => `
+                  <tr>
+                    <td style="font-weight:var(--font-medium);">${t}</td>
+                    <td>
+                      <div class="flex gap-1">
+                        <button class="btn btn-sm btn-ghost" onclick="GFP_Dashboard.editTerapis(${idx})" title="Edit">${icon('edit','sidebar-nav-icon')}</button>
+                        <button class="btn btn-sm btn-ghost" onclick="GFP_Dashboard.deleteTerapis(${idx})" title="Hapus" style="color:var(--color-error)">${icon('trash','sidebar-nav-icon')}</button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join('')}
+                ${(window.GFP_TERAPIS||[]).length === 0 ? `<tr><td colspan="2" class="text-center" style="color:var(--color-text-muted);">Belum ada data terapis.</td></tr>` : ''}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="settings-section">
           <div class="settings-section-title">Akun Admin</div>
           <div class="card" style="display:flex;flex-direction:column;gap:var(--space-4);">
             <div class="form-row">
@@ -612,6 +645,38 @@ const Dashboard = (() => {
         </div>
       </div>
     `;
+  }
+
+  // ─── Terapis Management Methods ───────────────────────────────────────────
+  function addTerapis() {
+    const name = prompt('Masukkan nama terapis baru:');
+    if (name && name.trim()) {
+      if (!window.GFP_TERAPIS) window.GFP_TERAPIS = [];
+      window.GFP_TERAPIS.push(name.trim());
+      window.GFP_Toast?.show('Terapis berhasil ditambahkan', 'success', 'Berhasil');
+      switchSubView('pengaturan');
+    }
+  }
+
+  function editTerapis(index) {
+    if (!window.GFP_TERAPIS || !window.GFP_TERAPIS[index]) return;
+    const currentName = window.GFP_TERAPIS[index];
+    const newName = prompt('Edit nama terapis:', currentName);
+    if (newName && newName.trim() && newName.trim() !== currentName) {
+      window.GFP_TERAPIS[index] = newName.trim();
+      window.GFP_Toast?.show('Nama terapis diperbarui', 'success', 'Tersimpan');
+      switchSubView('pengaturan');
+    }
+  }
+
+  function deleteTerapis(index) {
+    if (!window.GFP_TERAPIS || !window.GFP_TERAPIS[index]) return;
+    const currentName = window.GFP_TERAPIS[index];
+    if (confirm(`Apakah Anda yakin ingin menghapus "${currentName}" dari daftar terapis?`)) {
+      window.GFP_TERAPIS.splice(index, 1);
+      window.GFP_Toast?.show('Terapis dihapus', 'success', 'Dihapus');
+      switchSubView('pengaturan');
+    }
   }
 
   // ─── Patient detail modal ─────────────────────────────────────────────────
@@ -673,7 +738,7 @@ const Dashboard = (() => {
     const existing = document.getElementById('edit-patient-modal');
     if (existing) existing.remove();
 
-    const TERAPIS_LIST = window.GFP_CONFIG?.TERAPIS_LIST || ['dr. Rina', 'dr. Hendra', 'dr. Siti', 'dr. Bayu'];
+    const TERAPIS_LIST = window.GFP_TERAPIS || [];
     const STATUS_LIST  = Object.values(window.GFP_STATUS || {});
 
     const modal = document.createElement('div');
@@ -956,7 +1021,11 @@ const Dashboard = (() => {
     renderDashboardHome();
   }
 
-  return { init, switchSubView, showPatientDetail, showEditPatient, saveEditPatient, filterPatients, saveConfig, renderDashboardHome };
+  return { 
+    init, switchSubView, showPatientDetail, showEditPatient, saveEditPatient, 
+    filterPatients, saveConfig, renderDashboardHome,
+    addTerapis, editTerapis, deleteTerapis
+  };
 })();
 
 window.GFP_Dashboard = Dashboard;
