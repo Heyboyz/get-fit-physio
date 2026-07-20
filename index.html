@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get Fit Physio — Klinik Fisioterapi Anak, Neuromuskular, dan Muskuloskeletal. Pelayanan profesional, jadwal fleksibel, dan pendampingan terapeutik terpercaya.">
+  <meta name="keywords" content="fisioterapi, klinik fisioterapi, fisioterapi anak, neuromuskular, muskuloskeletal, terapis, rehabilitasi">
+  <meta property="og:title" content="Get Fit Physio — Klinik Fisioterapi Profesional">
+  <meta property="og:description" content="Layanan fisioterapi anak, neuromuskular, dan muskuloskeletal oleh tim terapis berpengalaman.">
+  <meta property="og:type" content="website">
+  <title>Get Fit Physio — Klinik Fisioterapi Profesional</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+
+  <!-- Favicon (inline SVG as data URL) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230D9488'/><path d='M8 16h6v-6h4v6h6v4h-6v6h-4v-6H8v-4z' fill='white'/></svg>">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     MAIN NAVIGATION (Landing + Form views)
+     ═══════════════════════════════════════════ -->
+<nav class="main-nav no-print" id="main-nav" role="navigation" aria-label="Navigasi utama">
+  <div class="container nav-inner">
+
+    <!-- Logo -->
+    <div class="nav-logo" id="nav-logo" onclick="GFP_App.showView('landing')" role="button" tabindex="0" aria-label="Ke beranda">
+      <img src="logo.png" alt="Get Fit Physio Logo" class="nav-logo-img">
+      <div class="nav-logo-text">
+        <div class="nav-logo-name">Get Fit Physio</div>
+        <div class="nav-logo-tagline">Move to Get Fit</div>
+      </div>
+    </div>
+
+    <!-- Nav links (desktop) -->
+    <div class="nav-links">
+      <span class="nav-link" data-scroll-to="services" role="button" tabindex="0">Layanan</span>
+      <span class="nav-link" data-scroll-to="workflow" role="button" tabindex="0">Alur</span>
+      <span class="nav-link" data-scroll-to="contact"  role="button" tabindex="0">Kontak</span>
+    </div>
+
+    <!-- Nav actions -->
+    <div class="nav-actions">
+      <button class="dark-toggle" id="dark-toggle-nav" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="btn btn-secondary btn-sm" id="nav-cta-login">Login Admin</button>
+      <button class="btn btn-primary btn-sm" id="nav-cta-daftar">Daftar Pasien</button>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     VIEW: LANDING PAGE
+     ═══════════════════════════════════════════ -->
+<div id="view-landing" class="view">
+
+  <!-- ── HERO ── -->
+  <section class="hero-section" id="hero" data-section>
+    <div class="hero-bg">
+      <div class="hero-bg-gradient"></div>
+      <div class="hero-bg-grid"></div>
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+    </div>
+
+    <div class="hero-content container">
+      <div class="hero-inner">
+        <!-- Text -->
+        <div>
+          <div class="hero-eyebrow reveal">
+            <span class="hero-eyebrow-dot"></span>
+            Klinik Fisioterapi Terpercaya
+          </div>
+
+          <h1 class="hero-headline reveal reveal-delay-1">
+            Pulih Lebih Cepat,<br>
+            Hidup Lebih <span class="highlight">Berkualitas</span>
+          </h1>
+
+          <p class="hero-desc reveal reveal-delay-2">
+            <strong>Get Fit Physio</strong> hadir untuk mendampingi perjalanan pemulihan Anda.
+            Melayani fisioterapi anak, neuromuskular, dan muskuloskeletal dengan pendekatan
+            klinis berbasis bukti oleh tim terapis berpengalaman.
+          </p>
+
+          <div class="hero-cta reveal reveal-delay-3">
+            <button class="btn btn-primary btn-xl" id="cta-daftar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.25rem;height:1.25rem;"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              Daftar Pasien Baru
+            </button>
+            <button class="btn btn-secondary btn-xl" id="cta-login">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.25rem;height:1.25rem;"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Login Admin
+            </button>
+          </div>
+
+          <div class="hero-stats reveal reveal-delay-4">
+            <div class="hero-stat-item">
+              <span class="hero-stat-value" data-count-to="500" data-count-suffix="+">500+</span>
+              <span class="hero-stat-label">Pasien Ditangani</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-value" data-count-to="4" data-count-suffix="">4</span>
+              <span class="hero-stat-label">Terapis Berpengalaman</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-value" data-count-to="3" data-count-suffix="">3</span>
+              <span class="hero-stat-label">Layanan Spesialis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual card -->
+        <div class="hero-visual reveal reveal-delay-2">
+          <div class="hero-card-main">
+            <div class="hero-card-header">
+              <div class="hero-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div>
+                <div class="hero-card-title">Jadwal Hari Ini</div>
+                <div class="hero-card-sub">Kamis, 17 Juli 2025</div>
+              </div>
+              <span class="badge badge-success badge-dot" style="margin-left:auto;">3 Sesi</span>
+            </div>
+            <div class="hero-schedule-list">
+              <div class="hero-schedule-item">
+                <div class="hero-schedule-dot" style="background:var(--color-primary);"></div>
+                <div class="hero-schedule-name">Budi Santoso</div>
+                <div class="hero-schedule-time">09:00</div>
+                <span class="badge badge-primary hero-schedule-badge">Terjadwal</span>
+              </div>
+              <div class="hero-schedule-item">
+                <div class="hero-schedule-dot" style="background:var(--clr-accent-500);"></div>
+                <div class="hero-schedule-name">Sari Dewi</div>
+                <div class="hero-schedule-time">10:00</div>
+                <span class="badge badge-primary hero-schedule-badge">Terjadwal</span>
+              </div>
+              <div class="hero-schedule-item">
+                <div class="hero-schedule-dot" style="background:var(--color-success);"></div>
+                <div class="hero-schedule-name">Fajar Nugroho</div>
+                <div class="hero-schedule-time">15:00</div>
+                <span class="badge badge-success hero-schedule-badge">Selesai</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating cards -->
+          <div class="hero-float-card hero-float-card-1">
+            <div class="hero-float-inner">
+              <div class="hero-float-icon">✅</div>
+              <div>
+                <div class="hero-float-text-label">Reminder Terkirim</div>
+                <div class="hero-float-text-value">H-1 WhatsApp</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-float-card hero-float-card-2">
+            <div class="hero-float-inner">
+              <div class="hero-float-icon">📊</div>
+              <div>
+                <div class="hero-float-text-label">Follow-up Rate</div>
+                <div class="hero-float-text-value">95% ✨</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section class="services-section section" id="services" data-section>
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label reveal">Layanan Kami</div>
+        <h2 class="section-title reveal reveal-delay-1">Spesialis Fisioterapi<br>yang Anda Butuhkan</h2>
+        <p class="section-desc reveal reveal-delay-2">
+          Kami menyediakan layanan fisioterapi komprehensif dengan pendekatan holistik
+          dan berbasis bukti ilmiah untuk mendukung proses pemulihan Anda.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- Fisioterapi Anak -->
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+              <path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Fisioterapi Anak</h3>
+          <p class="service-desc">
+            Program terapi khusus untuk anak-anak dengan kondisi keterlambatan perkembangan,
+            gangguan sensorik, hipotonia, dan kebutuhan tumbuh kembang lainnya.
+          </p>
+          <div class="service-features">
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Keterlambatan motorik kasar & halus
+            </div>
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Gangguan sensorik & keseimbangan
+            </div>
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Hipotonia & koordinasi gerak
+            </div>
+          </div>
+        </div>
+
+        <!-- Neuromuskular -->
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Fisioterapi Neuromuskular</h3>
+          <p class="service-desc">
+            Intervensi terapeutik untuk kondisi yang melibatkan sistem saraf dan otot,
+            termasuk pemulihan pasca stroke, cedera saraf, dan penyakit degeneratif.
+          </p>
+          <div class="service-features">
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Rehabilitasi pasca stroke
+            </div>
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Kelemahan anggota gerak
+            </div>
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Parkinson & kondisi degeneratif
+            </div>
+          </div>
+        </div>
+
+        <!-- Muskuloskeletal -->
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Fisioterapi Muskuloskeletal</h3>
+          <p class="service-desc">
+            Penanganan masalah pada otot, sendi, dan tulang — dari nyeri akut hingga
+            kondisi kronis dan pemulihan pasca operasi atau cedera olahraga.
+          </p>
+          <div class="service-features">
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Nyeri punggung & leher kronis
+            </div>
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Cedera olahraga & frozen shoulder
+            </div>
+            <div class="service-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Rehabilitasi pasca operasi
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORKFLOW ── -->
+  <section class="workflow-section section" id="workflow" data-section>
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label reveal">Alur Layanan</div>
+        <h2 class="section-title reveal reveal-delay-1">Dari Pendaftaran<br>hingga Pemulihan</h2>
+        <p class="section-desc reveal reveal-delay-2">
+          Proses yang sederhana, transparan, dan didukung sistem digital untuk
+          pengalaman terapi yang nyaman dan efisien.
+        </p>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-step reveal reveal-delay-1">
+          <div class="workflow-step-num teal">
+            1
+            <div class="workflow-step-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13.5 3H2.5a1 1 0 00-1 1v8a1 1 0 001 1h11a1 1 0 001-1V4a1 1 0 00-1-1z"/><path d="M5 3V2M11 3V2"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="workflow-step-title">Isi Form Pendaftaran</div>
+            <div class="workflow-step-desc">Pasien atau orang tua mengisi form intake online dengan data diri dan keluhan</div>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal reveal-delay-2">
+          <div class="workflow-step-num outlined">
+            2
+            <div class="workflow-step-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="13 4 6 11 3 8"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="workflow-step-title">Data Diverifikasi</div>
+            <div class="workflow-step-desc">Admin mereview kelengkapan data dan menentukan status pendaftaran</div>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal reveal-delay-3">
+          <div class="workflow-step-num outlined">
+            3
+            <div class="workflow-step-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 2a1 1 0 011 1v10a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1h6z"/><path d="M4 6h8"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="workflow-step-title">Admin Menghubungi</div>
+            <div class="workflow-step-desc">Tim admin menghubungi pasien via WhatsApp untuk konfirmasi dan asesmen awal</div>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal reveal-delay-4">
+          <div class="workflow-step-num teal">
+            4
+            <div class="workflow-step-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M5 8h6M8 5v6"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="workflow-step-title">Jadwal Terapi Dibuat</div>
+            <div class="workflow-step-desc">Admin menjadwalkan sesi terapi dan menginput ke Google Calendar</div>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal reveal-delay-1">
+          <div class="workflow-step-num outlined">
+            5
+            <div class="workflow-step-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3a5 5 0 100 10A5 5 0 008 3z"/><path d="M8 6v2.5l1.5 1"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="workflow-step-title">Reminder H-1 Dikirim</div>
+            <div class="workflow-step-desc">Sistem mengirim reminder otomatis via WhatsApp & email sehari sebelum sesi</div>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal reveal-delay-2">
+          <div class="workflow-step-num teal">
+            6
+            <div class="workflow-step-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a4 4 0 100 8A4 4 0 008 2zM2 14a6 6 0 0112 0"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="workflow-step-title">Sesi Terapi Berlangsung</div>
+            <div class="workflow-step-desc">Terapis melaksanakan sesi fisioterapi dan mencatat perkembangan pasien</div>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal reveal-delay-3">
+          <div class="workflow-step-num outlined">
+            7
+            <div class="workflow-step-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 4H3a1 1 0 00-1 1v7a1 1 0 001 1h10a1 1 0 001-1V5a1 1 0 00-1-1z"/><path d="M5 8h4M5 10h3"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="workflow-step-title">Laporan & Follow-up</div>
+            <div class="workflow-step-desc">Catatan terapi direkam, laporan dibuat, dan rencana follow-up disusun untuk sesi berikutnya</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:var(--space-12);" class="reveal">
+        <button class="btn btn-primary btn-lg" onclick="GFP_App.showView('form')">
+          Mulai Pendaftaran Sekarang
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.125rem;height:1.125rem;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact-section section" id="contact" data-section>
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <div class="section-label reveal">Hubungi Kami</div>
+          <h2 class="section-title reveal reveal-delay-1">Siap Melayani<br>Kesembuhan Anda</h2>
+          <p class="section-desc reveal reveal-delay-2" style="margin-bottom:var(--space-8);">
+            Punya pertanyaan tentang layanan kami? Jangan ragu untuk menghubungi
+            tim kami. Kami siap membantu Anda.
+          </p>
+
+          <div class="contact-info">
+            <div class="contact-item reveal reveal-delay-1">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Alamat</div>
+                <div class="contact-item-value">Jl. Sehat No. 12, Jakarta Selatan</div>
+                <div class="contact-item-sub">DKI Jakarta, 12345</div>
+              </div>
+            </div>
+
+            <div class="contact-item reveal reveal-delay-2">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.555 4.112 1.524 5.84L0 24l6.333-1.499A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.028-1.381l-.36-.213-3.762.889.926-3.651-.234-.374A9.804 9.804 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">WhatsApp</div>
+                <div class="contact-item-value">0812-3456-7890</div>
+                <div class="contact-item-sub">Respon dalam 1x24 jam</div>
+              </div>
+            </div>
+
+            <div class="contact-item reveal reveal-delay-3">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Email</div>
+                <div class="contact-item-value">info@getfitphysio.com</div>
+                <div class="contact-item-sub">Untuk pertanyaan dan konsultasi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <div class="contact-card">
+            <h3 class="contact-card-title">Jam Operasional Klinik</h3>
+            <p class="contact-card-desc">
+              Kami beroperasi 6 hari seminggu untuk melayani kebutuhan terapi Anda
+              dengan jadwal yang fleksibel.
+            </p>
+            <div class="contact-card-hours">
+              <div class="contact-card-hour-row">
+                <span class="day">Senin – Jumat</span>
+                <span>08.00 – 17.00 WIB</span>
+              </div>
+              <div class="contact-card-hour-row">
+                <span class="day">Sabtu</span>
+                <span>08.00 – 13.00 WIB</span>
+              </div>
+              <div class="contact-card-hour-row">
+                <span class="day">Minggu & Hari Libur</span>
+                <span style="opacity:0.5;">Tutup</span>
+              </div>
+            </div>
+            <div class="contact-card-cta">
+              <button class="btn" style="background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.3);width:100%;" onclick="GFP_App.showView('form')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.125rem;height:1.125rem;"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                Daftar Sekarang — Gratis
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+      <div class="nav-logo" style="cursor:default;">
+        <img src="logo.png" alt="Get Fit Physio Logo" class="nav-logo-img footer-logo-img">
+        <div class="nav-logo-text">
+          <div class="nav-logo-name">Get Fit Physio</div>
+          <div class="nav-logo-tagline">Move to Get Fit</div>
+        </div>
+      </div>
+          <p class="footer-tagline">
+            Mendampingi perjalanan pemulihan Anda dengan layanan fisioterapi profesional,
+            berbasis bukti, dan penuh empati.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Layanan</div>
+          <div class="footer-links">
+            <span class="footer-link">Fisioterapi Anak</span>
+            <span class="footer-link">Fisioterapi Neuromuskular</span>
+            <span class="footer-link">Fisioterapi Muskuloskeletal</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Tautan</div>
+          <div class="footer-links">
+            <span class="footer-link" data-scroll-to="services">Layanan</span>
+            <span class="footer-link" data-scroll-to="workflow">Alur Layanan</span>
+            <span class="footer-link" data-scroll-to="contact">Kontak</span>
+            <span class="footer-link" onclick="GFP_App.showView('form')">Daftar Pasien</span>
+            <span class="footer-link" onclick="GFP_App.showLoginModal()">Login Admin</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div style="color:var(--clr-neutral-500);font-size:var(--text-sm);">
+          © 2025 <strong style="color:var(--clr-neutral-300);">Get Fit Physio</strong>. Hak cipta dilindungi.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /view-landing -->
+
+
+<!-- ═══════════════════════════════════════════
+     VIEW: FORM PASIEN BARU
+     ═══════════════════════════════════════════ -->
+<div id="view-form" class="view hidden">
+
+  <!-- Page header -->
+  <div class="form-page-header">
+    <div class="container">
+      <div class="form-page-eyebrow">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;"><path d="M8 1a7 7 0 100 14A7 7 0 008 1z"/><path d="M8 5v3l2 2"/></svg>
+        Pendaftaran Pasien Baru
+      </div>
+      <h1 class="form-page-title">Form Intake Pasien</h1>
+      <p class="form-page-subtitle">Isi data dengan lengkap dan benar. Admin akan menghubungi Anda dalam 1×24 jam.</p>
+    </div>
+  </div>
+
+  <div class="form-page-body">
+    <div class="container">
+      <div class="form-page-layout">
+
+        <!-- Form card -->
+        <div class="intake-form-card" id="intake-form-card">
+          <form id="intake-form" novalidate>
+
+            <!-- Section 1: Data Pasien -->
+            <div class="form-section-header">
+              <div class="form-section-label">
+                <span class="form-section-num">1</span>
+                Data Pasien
+              </div>
+            </div>
+            <div class="form-section-body">
+              <div style="display:flex;flex-direction:column;gap:var(--space-4);">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="field-nama_pasien">Nama Pasien <span class="required">*</span></label>
+                    <input id="field-nama_pasien" class="form-control" type="text" placeholder="Nama lengkap pasien" autocomplete="name">
+                    <div id="err-nama_pasien" class="form-error-msg"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="field-umur">Umur <span class="required">*</span></label>
+                    <input id="field-umur" class="form-control" type="number" placeholder="Contoh: 8" min="0" max="120">
+                    <div id="err-umur" class="form-error-msg"></div>
+                  </div>
+                </div>
+
+                <div class="form-group" id="group-nama_orang_tua">
+                  <label class="form-label" for="field-nama_orang_tua">Nama Orang Tua / Wali</label>
+                  <input id="field-nama_orang_tua" class="form-control" type="text" placeholder="Diisi jika pasien adalah anak" autocomplete="off">
+                  <div class="form-hint">Wajib diisi untuk pasien Fisioterapi Anak</div>
+                  <div id="err-nama_orang_tua" class="form-error-msg"></div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="field-no_whatsapp">Nomor WhatsApp <span class="required">*</span></label>
+                  <input id="field-no_whatsapp" class="form-control" type="tel" placeholder="Contoh: 0812-3456-7890" autocomplete="tel">
+                  <div class="form-hint">Digunakan untuk konfirmasi jadwal dan pengiriman reminder</div>
+                  <div id="err-no_whatsapp" class="form-error-msg"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Layanan & Keluhan -->
+            <div class="form-section-header">
+              <div class="form-section-label">
+                <span class="form-section-num">2</span>
+                Layanan & Keluhan
+              </div>
+            </div>
+            <div class="form-section-body">
+              <div style="display:flex;flex-direction:column;gap:var(--space-4);">
+                <div class="form-group">
+                  <label class="form-label" for="field-layanan">Layanan yang Dibutuhkan <span class="required">*</span></label>
+                  <select id="field-layanan" class="form-control">
+                    <option value="">-- Pilih layanan --</option>
+                    <option>Fisioterapi Anak</option>
+                    <option>Fisioterapi Neuromuskular</option>
+                    <option>Fisioterapi Muskuloskeletal</option>
+                  </select>
+                  <div id="err-layanan" class="form-error-msg"></div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="field-keluhan_utama">Keluhan Utama <span class="required">*</span></label>
+                  <textarea id="field-keluhan_utama" class="form-control" placeholder="Deskripsikan keluhan yang Anda atau pasien alami. Semakin detail semakin baik (min. 10 karakter)." rows="4"></textarea>
+                  <div id="err-keluhan_utama" class="form-error-msg"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Preferensi Jadwal -->
+            <div class="form-section-header">
+              <div class="form-section-label">
+                <span class="form-section-num">3</span>
+                Preferensi Jadwal
+              </div>
+            </div>
+            <div class="form-section-body">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="field-preferensi_hari">Preferensi Hari <span class="required">*</span></label>
+                  <select id="field-preferensi_hari" class="form-control">
+                    <option value="">-- Pilih hari --</option>
+                    <option>Senin</option>
+                    <option>Selasa</option>
+                    <option>Rabu</option>
+                    <option>Kamis</option>
+                    <option>Jumat</option>
+                    <option>Sabtu</option>
+                  </select>
+                  <div id="err-preferensi_hari" class="form-error-msg"></div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="field-preferensi_jam">Preferensi Jam <span class="required">*</span></label>
+                  <select id="field-preferensi_jam" class="form-control">
+                    <option value="">-- Pilih jam --</option>
+                    <option>08:00</option>
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                  </select>
+                  <div id="err-preferensi_jam" class="form-error-msg"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form footer -->
+            <div class="form-footer">
+              <div class="form-footer-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Data Anda aman dan terlindungi
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button" class="btn btn-secondary" onclick="GFP_App.showView('landing')">Kembali</button>
+                <button type="submit" class="btn btn-primary btn-lg" id="form-submit-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.125rem;height:1.125rem;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  Kirim Pendaftaran
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Sidebar info -->
+        <div class="form-sidebar">
+          <div class="form-info-card">
+            <div class="form-info-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              Apa yang Terjadi Selanjutnya?
+            </div>
+            <div class="form-info-steps">
+              <div class="form-info-step">
+                <div class="form-info-step-num">1</div>
+                <div class="form-info-step-text">Form Anda akan direview oleh tim admin dalam 1×24 jam</div>
+              </div>
+              <div class="form-info-step">
+                <div class="form-info-step-num">2</div>
+                <div class="form-info-step-text">Admin akan menghubungi Anda via WhatsApp untuk konfirmasi</div>
+              </div>
+              <div class="form-info-step">
+                <div class="form-info-step-num">3</div>
+                <div class="form-info-step-text">Jadwal terapi akan dikonfirmasi dan reminder dikirim H-1</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-info-card" style="background:var(--color-primary-subtle);border-color:var(--color-primary-muted);">
+            <div class="form-info-card-title" style="color:var(--color-primary);">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.555 4.112 1.524 5.84L0 24l6.333-1.499A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.028-1.381l-.36-.213-3.762.889.926-3.651-.234-.374A9.804 9.804 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              Butuh Bantuan Segera?
+            </div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-secondary);margin-bottom:var(--space-3);">
+              Hubungi kami langsung via WhatsApp untuk konsultasi gratis
+            </p>
+            <a href="https://wa.me/6281234567890?text=Halo%20Get%20Fit%20Physio%2C%20saya%20ingin%20bertanya..." target="_blank" class="btn btn-primary" style="width:100%;">
+              Chat WhatsApp
+            </a>
+          </div>
+
+          <div class="form-info-card">
+            <div class="form-info-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Keamanan Data
+            </div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-secondary);">
+              Data Anda diproteksi dan hanya digunakan untuk keperluan administrasi klinik.
+              Kami tidak membagikan informasi Anda kepada pihak ketiga.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div><!-- /view-form -->
+
+
+<!-- ═══════════════════════════════════════════
+     VIEW: ADMIN DASHBOARD
+     ═══════════════════════════════════════════ -->
+<div id="view-dashboard" class="view hidden">
+  <div class="dashboard-layout">
+
+    <!-- Sidebar overlay (mobile) -->
+    <div class="mobile-sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar" id="sidebar" role="complementary" aria-label="Menu navigasi admin">
+
+      <!-- Brand -->
+      <div class="sidebar-brand">
+        <img src="logo.png" alt="Get Fit Physio Logo" class="sidebar-logo-img">
+        <div class="sidebar-logo-text">
+          <div class="sidebar-logo-name">Get Fit Physio</div>
+          <div class="sidebar-logo-tagline">Admin Panel</div>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav class="sidebar-nav" aria-label="Menu dashboard">
+        <span class="sidebar-section-label">Menu Utama</span>
+
+        <div class="sidebar-nav-item active" data-view="dashboard" role="button" tabindex="0">
+          <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </div>
+
+        <div class="sidebar-nav-item" data-view="pasien" role="button" tabindex="0">
+          <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          Pasien
+          <span class="sidebar-nav-badge" id="badge-pasien">8</span>
+        </div>
+
+        <div class="sidebar-nav-item" data-view="jadwal" role="button" tabindex="0">
+          <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Jadwal Terapi
+        </div>
+
+        <span class="sidebar-section-label">Klinis</span>
+
+        <div class="sidebar-nav-item" data-view="asesmen" role="button" tabindex="0">
+          <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Asesmen & Catatan
+        </div>
+
+        <div class="sidebar-nav-item" data-view="laporan" role="button" tabindex="0">
+          <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Laporan
+        </div>
+
+        <span class="sidebar-section-label">Sistem</span>
+
+        <div class="sidebar-nav-item" data-view="pengaturan" role="button" tabindex="0">
+          <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Pengaturan
+        </div>
+      </nav>
+
+      <!-- Footer user info -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user" onclick="GFP_Dashboard.switchSubView('pengaturan')">
+          <div class="avatar avatar-sm" id="sidebar-user-avatar">AG</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name" id="sidebar-user-name">Admin GFP</div>
+            <div class="sidebar-user-role" id="sidebar-user-role">Administrator</div>
+          </div>
+          <svg class="sidebar-user-action" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <div class="dashboard-main">
+
+      <!-- Top bar -->
+      <header class="dashboard-topbar">
+        <button class="topbar-menu-btn" id="topbar-menu-btn" aria-label="Toggle sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+
+        <div class="topbar-actions">
+          <button class="topbar-notif-btn" aria-label="Notifikasi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <div class="topbar-notif-dot"></div>
+          </button>
+
+          <button class="dark-toggle" id="dark-toggle-dashboard" aria-label="Toggle dark mode">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+
+          <button class="btn btn-sm btn-secondary" onclick="GFP_App.showView('landing')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1rem;height:1rem;"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Beranda
+          </button>
+
+          <button class="btn btn-sm btn-danger" onclick="GFP_App.logout()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1rem;height:1rem;"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Logout
+          </button>
+        </div>
+      </header>
+
+      <!-- Content area -->
+      <main class="dashboard-content">
+        <div id="sub-content">
+          <!-- Rendered by dashboard.js -->
+        </div>
+      </main>
+
+    </div><!-- /dashboard-main -->
+  </div><!-- /dashboard-layout -->
+</div><!-- /view-dashboard -->
+
+
+<!-- ═══════════════════════════════════════════
+     TOAST NOTIFICATIONS
+     ═══════════════════════════════════════════ -->
+<div class="toast-container" id="toast-container" role="region" aria-label="Notifikasi" aria-live="polite"></div>
+
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS (load order matters)
+     ═══════════════════════════════════════════ -->
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/landing.js"></script>
+<script src="js/form.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+  // Extra: footer / form view nav links use scroll-to
+  document.querySelectorAll('[data-scroll-to]').forEach(el => {
+    el.addEventListener('click', () => {
+      const target = document.getElementById(el.dataset.scrollTo);
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Mobile menu button: show landing nav in a dropdown (simple toggle)
+  document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
+    const links = document.querySelector('.nav-links');
+    if (links) {
+      const shown = links.style.display === 'flex';
+      links.style.cssText = shown
+        ? ''
+        : 'display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--color-surface);border-bottom:1px solid var(--color-border);padding:1rem;gap:4px;z-index:200;box-shadow:var(--shadow-md);';
+    }
+  });
+
+  // Extra dark toggle for dashboard (since it's in a different view)
+  document.getElementById('dark-toggle-dashboard')?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('gfp_theme', next);
+  });
+</script>
+
+</body>
+</html>
