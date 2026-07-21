@@ -26,30 +26,18 @@ const AUTH = (() => {
 
   // ─── Login ────────────────────────────────────────────────────────────────
   async function login(email, password) {
-    // Simulate API call delay
-    await sleep(900);
-
-    // If a real endpoint is configured, use it:
-    if (window.GFP_CONFIG?.AUTH_ENDPOINT) {
-      const res = await fetch(window.GFP_CONFIG.AUTH_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      if (!res.ok) throw new Error('Login gagal. Periksa email dan password.');
-      const user = await res.json();
-      saveSession(user);
-      return user;
+    if (!window.GFP_UTILS?.syncServer) throw new Error('Sistem belum siap.');
+    
+    const res = await window.GFP_UTILS.syncServer('login', { username: email, password });
+    
+    if (res && res.success) {
+      const user = res.user || { name: 'Admin', role: 'Administrator' };
+      const session = { email, name: user.nama || user.name, role: user.role, avatar: 'AD' };
+      saveSession(session);
+      return session;
+    } else {
+      throw new Error(res?.message || 'Email atau password salah.');
     }
-
-    // Demo mode
-    const user = DEMO_USERS.find(
-      u => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-    );
-    if (!user) throw new Error('Email atau password tidak valid.');
-    const session = { email: user.email, name: user.name, role: user.role, avatar: user.avatar };
-    saveSession(session);
-    return session;
   }
 
   // ─── Logout ───────────────────────────────────────────────────────────────

@@ -41,6 +41,59 @@ const Dashboard = (() => {
     return `<span class="badge ${cls} badge-dot">${status}</span>`;
   }
 
+  // ─── Settings / Update Credentials ─────────────────────────────────────────
+  async function updateCredentials(btn) {
+    const email = document.getElementById('cfg-admin-email')?.value?.trim();
+    const pass = document.getElementById('cfg-admin-pass')?.value;
+    
+    if (!email || !pass) {
+      window.GFP_Toast?.show('Email dan Password baru wajib diisi!', 'warning', 'Perhatian');
+      return;
+    }
+    
+    if (btn) btn.classList.add('loading');
+    
+    try {
+      const res = await window.GFP_UTILS?.syncServer?.('update_credentials', { new_username: email, new_password: pass });
+      if (res && res.success) {
+        window.GFP_Toast?.show('Username dan Password berhasil diubah!', 'success', 'Berhasil');
+        document.getElementById('cfg-admin-pass').value = '';
+        // Update local session
+        const sess = window.GFP_AUTH?.getCurrentUser();
+        if (sess) {
+          sess.email = email;
+          sessionStorage.setItem('gfp_session', JSON.stringify(sess));
+        }
+      } else {
+        window.GFP_Toast?.show(res?.message || 'Gagal menyimpan kredensial.', 'error', 'Error');
+      }
+    } catch (e) {
+      window.GFP_Toast?.show('Terjadi kesalahan jaringan.', 'error', 'Error');
+    } finally {
+      if (btn) btn.classList.remove('loading');
+    }
+  }
+
+  // ─── Delete Patient ───────────────────────────────────────────────────────
+  async function deletePatient(patientId) {
+    if (!confirm('Apakah Anda yakin ingin menghapus data pasien ini? Data yang dihapus tidak dapat dikembalikan.')) return;
+    
+    try {
+      const res = await window.GFP_UTILS?.syncServer?.('delete_patient', { patient_id: patientId });
+      if (res && res.success) {
+        window.GFP_Toast?.show('Data pasien berhasil dihapus.', 'success', 'Terhapus');
+        // Update local array
+        window.GFP_PATIENTS = window.GFP_PATIENTS.filter(p => p.patient_id !== patientId);
+        // Re-render
+        switchSubView('pasien');
+      } else {
+        window.GFP_Toast?.show(res?.message || 'Gagal menghapus pasien.', 'error', 'Error');
+      }
+    } catch (e) {
+      window.GFP_Toast?.show('Terjadi kesalahan jaringan.', 'error', 'Error');
+    }
+  }
+
   // ─── Render KPIs ──────────────────────────────────────────────────────────
   function renderKPIs() {
     const kpis = window.GFP_UTILS?.getKPIs?.() || { active:0, today:0, review:0, followupRate:0 };
@@ -334,6 +387,7 @@ const Dashboard = (() => {
                     <button class="btn btn-sm btn-ghost" onclick="GFP_Dashboard.showPatientDetail('${p.patient_id}')" title="Detail">${icon('eye','sidebar-nav-icon')}</button>
                     <button class="btn btn-sm btn-ghost" onclick="GFP_Dashboard.showEditPatient('${p.patient_id}')" title="Edit">${icon('edit','sidebar-nav-icon')}</button>
                     <a href="https://wa.me/${p.no_whatsapp.replace(/\D/g,'').replace(/^0/,'62')}" target="_blank" class="btn btn-sm btn-ghost" style="color:var(--color-success)" title="WhatsApp">${icon('phone','sidebar-nav-icon')}</a>
+                    <button class="btn btn-sm btn-ghost" onclick="GFP_Dashboard.deletePatient('${p.patient_id}')" title="Hapus" style="color:var(--color-danger)">${icon('trash','sidebar-nav-icon')}</button>
                   </div>
                 </td>
               </tr>
@@ -624,21 +678,28 @@ const Dashboard = (() => {
           </div>
         </div>
         <div class="settings-section">
-          <div class="settings-section-title">Akun Admin</div>
+          <div class="settings-section-title">Akun Admin (Klinik)</div>
           <div class="card" style="display:flex;flex-direction:column;gap:var(--space-4);">
+            <div class="alert alert-warning" style="margin-bottom:var(--space-2);font-size:var(--text-xs);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1rem;height:1rem;flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              Ganti Email & Password ini jika Anda merasa kredensial lama sudah tidak aman. Data ini disimpan sangat aman di Cloud.
+            </div>
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">Nama</label>
-                <input class="form-control" value="${window.GFP_AUTH?.getCurrentUser()?.name||'Admin'}" disabled>
+                <label class="form-label" for="cfg-admin-email">Username (Email) Baru</label>
+                <input id="cfg-admin-email" type="email" class="form-control" value="${window.GFP_AUTH?.getCurrentUser()?.email||'admin@getfitphysio.com'}">
               </div>
               <div class="form-group">
-                <label class="form-label">Role</label>
-                <input class="form-control" value="${window.GFP_AUTH?.getCurrentUser()?.role||'Administrator'}" disabled>
+                <label class="form-label" for="cfg-admin-pass">Password Baru</label>
+                <input id="cfg-admin-pass" type="password" class="form-control" placeholder="Biarkan kosong jika tidak ingin mengubah password">
               </div>
             </div>
-            <div class="flex justify-end">
-              <button class="btn btn-danger btn-sm" onclick="GFP_App.logout()">
+            <div class="flex justify-end gap-2" style="margin-top:var(--space-2);">
+              <button class="btn btn-outline btn-sm" onclick="GFP_App.logout()">
                 ${icon('logout','sidebar-nav-icon')} Logout
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="GFP_Dashboard.updateCredentials(this)">
+                Simpan Akun
               </button>
             </div>
           </div>
@@ -1074,7 +1135,7 @@ const Dashboard = (() => {
   return { 
     init, switchSubView, showPatientDetail, showEditPatient, saveEditPatient, 
     filterPatients, saveConfig, renderDashboardHome,
-    addTerapis, editTerapis, deleteTerapis
+    addTerapis, editTerapis, deleteTerapis, updateCredentials, deletePatient
   };
 })();
 
