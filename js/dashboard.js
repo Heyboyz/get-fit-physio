@@ -1123,10 +1123,33 @@ const Dashboard = (() => {
 
     // Fetch data from server
     window.GFP_UTILS?.syncServer?.('get_data').then(serverData => {
-      if (serverData && serverData.success && serverData.data?.terapis) {
-        if (serverData.data.terapis.length > 0) {
+      if (serverData && serverData.success && serverData.data) {
+        if (serverData.data.terapis && serverData.data.terapis.length > 0) {
           window.GFP_TERAPIS = serverData.data.terapis;
-          if (currentSubView === 'pengaturan') switchSubView('pengaturan');
+        }
+        
+        if (serverData.data.raw_pasien) {
+          window.GFP_PATIENTS = serverData.data.raw_pasien.map(row => ({
+            patient_id: row['ID Pasien'],
+            nama_pasien: row['Nama Pasien'],
+            umur: row['Umur'],
+            nama_orang_tua: row['Nama Orang Tua / Wali'],
+            no_whatsapp: row['WhatsApp'],
+            layanan: row['Layanan'],
+            keluhan_utama: row['Keluhan Utama'],
+            preferensi_hari: row['Preferensi Hari'],
+            preferensi_jam: row['Preferensi Jam'],
+            status: row['Status'] || 'Menunggu Penjadwalan',
+            tipe_kunjungan: row['Tipe Kunjungan'] || 'Klinik',
+            alamat: row['Alamat Lengkap'] || '-',
+            koordinat: row['Koordinat'] || '-',
+            maps_url: row['Google Maps Link'] || '-'
+          }));
+        }
+
+        // Re-render
+        if (['dashboard', 'pasien', 'pengaturan'].includes(currentSubView)) {
+          switchSubView(currentSubView);
         }
       }
     });
