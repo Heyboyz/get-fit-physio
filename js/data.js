@@ -255,32 +255,35 @@ const DUMMY_REMINDERS = [
 ];
 
 // ─── Today's Schedule ─────────────────────────────────────────────────────────
-const TODAY = '2025-07-17';
-
 function getTodaySchedule() {
-  return DUMMY_PATIENTS
-    .filter(p => p.tanggal_jadwal === TODAY)
-    .sort((a, b) => a.jam_jadwal.localeCompare(b.jam_jadwal));
+  const pts = window.GFP_PATIENTS || [];
+  const today = todayStr();
+  return pts
+    .filter(p => p.tanggal_jadwal === today)
+    .sort((a, b) => (a.jam_jadwal||'').localeCompare(b.jam_jadwal||''));
 }
 
 // ─── Follow-up list ───────────────────────────────────────────────────────────
 function getFollowUpList() {
-  return DUMMY_PATIENTS.filter(p =>
+  const pts = window.GFP_PATIENTS || [];
+  return pts.filter(p =>
     p.status === STATUS.TIDAK_HADIR || p.status === STATUS.FOLLOW_UP
   );
 }
 
 // ─── Need Review list ─────────────────────────────────────────────────────────
 function getNeedReviewList() {
-  return DUMMY_PATIENTS.filter(p => p.status === STATUS.NEED_REVIEW);
+  const pts = window.GFP_PATIENTS || [];
+  return pts.filter(p => p.status === STATUS.NEED_REVIEW);
 }
 
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 function getKPIs() {
-  const active    = DUMMY_PATIENTS.filter(p => p.status !== STATUS.SELESAI).length;
+  const pts       = window.GFP_PATIENTS || [];
+  const active    = pts.filter(p => p.status !== STATUS.SELESAI).length;
   const today     = getTodaySchedule().length;
   const review    = getNeedReviewList().length;
-  const selesai   = DUMMY_PATIENTS.filter(p => p.status === STATUS.SELESAI).length;
+  const selesai   = pts.filter(p => p.status === STATUS.SELESAI).length;
   const followup  = getFollowUpList().length;
   const rate      = selesai > 0
     ? Math.round(((selesai - followup) / selesai) * 100)
@@ -289,24 +292,42 @@ function getKPIs() {
 }
 
 // ─── Report Data (weekly) ─────────────────────────────────────────────────────
-const REPORT_WEEKLY = [
-  { hari: 'Sen', pasien: 4, selesai: 3 },
-  { hari: 'Sel', pasien: 5, selesai: 5 },
-  { hari: 'Rab', pasien: 6, selesai: 5 },
-  { hari: 'Kam', pasien: 3, selesai: 3 },
-  { hari: 'Jum', pasien: 4, selesai: 4 },
-  { hari: 'Sab', pasien: 2, selesai: 2 },
-  { hari: 'Min', pasien: 0, selesai: 0 },
-];
+function getWeeklyReport() {
+  const pts = window.GFP_PATIENTS || [];
+  const d = new Date();
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+  const startOfWeek = new Date(d.setDate(diff));
+  startOfWeek.setHours(0,0,0,0);
+  
+  const days = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+  const counts = [0, 0, 0, 0, 0, 0, 0];
+  const selesaiCounts = [0, 0, 0, 0, 0, 0, 0];
+  
+  pts.forEach(p => {
+    if (!p.tanggal_jadwal || p.tanggal_jadwal === '-') return;
+    const pd = new Date(p.tanggal_jadwal);
+    // Check if same week
+    const diffTime = pd.getTime() - startOfWeek.getTime();
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays >= 0 && diffDays <= 6) {
+      counts[diffDays]++;
+      if (p.status === STATUS.SELESAI) selesaiCounts[diffDays]++;
+    }
+  });
+
+  return days.map((h, i) => ({ hari: h, pasien: counts[i], selesai: selesaiCounts[i] }));
+}
 
 // ─── Helper: Generate patient ID ──────────────────────────────────────────────
 function generatePatientId() {
+  const pts = window.GFP_PATIENTS || [];
   const year = new Date().getFullYear();
-  const max  = DUMMY_PATIENTS.reduce((mx, p) => {
+  const max  = pts.reduce((mx, p) => {
     const n = parseInt(p.patient_id.split('-')[2]) || 0;
     return Math.max(mx, n);
   }, 0);
-  return `GFP-${year}-${String(max + 1).padStart(3, '0')}`;
+  return \`GFP-\${year}-\${String(max + 1).padStart(3, '0')}\`;
 }
 
 // ─── Helper: Format date (ID) ─────────────────────────────────────────────────
@@ -353,9 +374,8 @@ function getInitials(name) {
 window.GFP_CONFIG  = CONFIG;
 window.GFP_STATUS  = STATUS;
 window.GFP_STATUS_BADGE = STATUS_BADGE;
-window.GFP_PATIENTS = DUMMY_PATIENTS;
+window.GFP_PATIENTS = [];
 window.GFP_REMINDERS = DUMMY_REMINDERS;
-window.GFP_REPORT_WEEKLY = REPORT_WEEKLY;
 window.GFP_LAYANAN = LAYANAN_OPTIONS;
 window.GFP_HARI    = HARI_OPTIONS;
 window.GFP_JAM     = JAM_OPTIONS;
@@ -365,6 +385,7 @@ window.GFP_UTILS   = {
   getFollowUpList,
   getNeedReviewList,
   getKPIs,
+  getWeeklyReport,
   generatePatientId,
   formatDate,
   todayStr,

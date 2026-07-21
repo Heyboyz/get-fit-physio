@@ -565,7 +565,7 @@ const Dashboard = (() => {
     // Render mini chart
     const rc = document.getElementById('report-chart-laporan');
     if (rc) {
-      const data = window.GFP_REPORT_WEEKLY || [];
+      const data = window.GFP_UTILS?.getWeeklyReport?.() || [];
       const maxV = Math.max(...data.map(d=>d.pasien),1);
       rc.innerHTML = `<div class="report-bar-chart">
         ${data.map(d=>`
@@ -1076,7 +1076,24 @@ const Dashboard = (() => {
     renderTodaySchedule();
     renderReminders();
     renderFollowUp();
-    renderReport();
+
+    // Render chart home
+    const rc = document.getElementById('report-chart');
+    if (rc) {
+      const data = window.GFP_UTILS?.getWeeklyReport?.() || [];
+      const maxVal = Math.max(...data.map(d=>d.pasien), 1);
+      rc.innerHTML = `
+        <div class="report-bar-chart">
+          ${data.map(d => `
+            <div class="report-bar-col">
+              <div class="report-bar-value">${d.pasien}</div>
+              <div class="report-bar-fill" style="height:${Math.round((d.pasien/maxVal)*80)+4}px;"></div>
+              <div class="report-bar-label">${d.hari}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
   }
 
   // ─── Init dashboard ───────────────────────────────────────────────────────
@@ -1143,7 +1160,10 @@ const Dashboard = (() => {
             tipe_kunjungan: String(row['Tipe Kunjungan'] || '') || 'Klinik',
             alamat: String(row['Alamat Lengkap'] || '') || '-',
             koordinat: String(row['Koordinat'] || '') || '-',
-            maps_url: String(row['Google Maps Link'] || '') || '-'
+            maps_url: String(row['Google Maps Link'] || '') || '-',
+            terapis: String(row['Terapis'] || ''),
+            tanggal_jadwal: String(row['Tanggal Jadwal'] || ''),
+            jam_jadwal: String(row['Jam Jadwal'] || '')
           }));
         }
 
