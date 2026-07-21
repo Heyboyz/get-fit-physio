@@ -17,6 +17,9 @@ const FormModule = (() => {
     keluhan_utama:   { required: true, label: 'Keluhan Utama', minLen: 10 },
     preferensi_hari: { required: true, label: 'Preferensi Hari' },
     preferensi_jam:  { required: true, label: 'Preferensi Jam' },
+    alamat:          { required: false, label: 'Alamat Lengkap', minLen: 5 },
+    lat:             { required: false, label: 'Latitude' },
+    lng:             { required: false, label: 'Longitude' },
   };
 
   // ─── Validate a single field ──────────────────────────────────────────────
@@ -143,10 +146,14 @@ const FormModule = (() => {
       keluhan_utama:   formData.keluhan_utama,
       preferensi_hari: formData.preferensi_hari,
       preferensi_jam:  formData.preferensi_jam,
+      status:          'Baru',
+      tipe_kunjungan:  document.querySelector('input[name="tipe_kunjungan"]:checked')?.value || 'Klinik',
+      alamat:          formData.alamat || '-',
+      koordinat:       formData.lat && formData.lng ? `${formData.lat}, ${formData.lng}` : '-',
+      maps_url:        formData.lat && formData.lng ? `https://www.google.com/maps?q=${formData.lat},${formData.lng}` : '-',
       terapis:         '',
       tanggal_jadwal:  '',
       jam_jadwal:      '',
-      status:          'Menunggu Penjadwalan',
       catatan_terapi:  '',
       follow_up:       '',
     };
@@ -252,9 +259,94 @@ const FormModule = (() => {
     const form = document.getElementById('intake-form');
     if (form) form.addEventListener('submit', handleSubmit);
     initRealtime();
+
+    // Handle Home Care toggle
+    const radios = document.querySelectorAll('input[name="tipe_kunjungan"]');
+    const hcFields = document.getElementById('homecare-fields');
+    let mapInitialized = false;
+
+    radios.forEach(r => {
+      r.addEventListener('change', () => {
+        if (document.querySelector('input[name="tipe_kunjungan"]:checked')?.value === 'Home Care') {
+          hcFields.style.display = 'flex';
+          RULES.alamat.required = true;
+          document.querySelector('label[for="field-alamat"] .required')?.style.setProperty('display', 'inline');
+          if (!mapInitialized) {
+            initMap();
+            mapInitialized = true;
+          }
+        } else {
+          hcFields.style.display = 'none';
+          RULES.alamat.required = false;
+          showFieldError('alamat', null); // clear error
+          showFieldError('lat', null);
+        }
+      });
+    });
   }
 
-  return { init };
+  // ─── Map Logic (Leaflet) ──────────────────────────────────────────────────
+  let map, marker;
+  function initMap() {
+    if (!window.L) return; // Leaflet not loaded
+    const mapContainer = document.getElementById('map-container');
+    if (!mapContainer) return;
+
+    // Default to center of Jakarta if no location
+    const defaultLoc = [-6.2088, 106.8456];
+    map = L.map('map-container').setView(defaultLoc, 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    marker = L.marker(defaultLoc, { draggable: true }).addTo(map);
+
+    // Update inputs when marker dragged
+    marker.on('dragend', function (e) {
+      const pos = marker.getLatLng();
+      setCoords(pos.lat, pos.lng);
+    });
+
+    // Update inputs when map clicked
+    map.on('click', function(e) {
+      marker.setLatLng(e.latlng);
+      setCoords(e.latlng.lat, e.latlng.lng);
+    });
+
+    // Geolocation API
+    document.getElementById('btn-get-location')?.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        alert('Browser Anda tidak mendukung deteksi lokasi.');
+        return;
+      }
+      document.getElementById('btn-get-location').textContent = 'Mendeteksi...';
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          document.getElementById('btn-get-location').textContent = '📍 Deteksi Lokasi Saat Ini';
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          map.setView([lat, lng], 16);
+          marker.setLatLng([lat, lng]);
+          setCoords(lat, lng);
+        },
+        err => {
+          document.getElementById('btn-get-location').textContent = '📍 Deteksi Lokasi Saat Ini';
+          alert('Gagal mendeteksi lokasi. Silakan geser pin pada peta.');
+        },
+        { enableHighAccuracy: true }
+      );
+    });
+  }
+
+  function setCoords(lat, lng) {
+    const latEl = document.getElementById('field-lat');
+    const lngEl = document.getElementById('field-lng');
+    if (latEl) latEl.value = lat.toFixed(6);
+    if (lngEl) lngEl.value = lng.toFixed(6);
+    showFieldError('koordinat', null); // clear errors
+  }
+
+  return { init, collectFormData };
 })();
 
 window.GFP_Form = FormModule;

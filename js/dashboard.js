@@ -738,10 +738,22 @@ const Dashboard = (() => {
           <div class="detail-field"><span class="detail-label">Nama Orang Tua / Wali</span><span class="detail-value">${p.nama_orang_tua}</span></div>
           <div class="detail-field"><span class="detail-label">WhatsApp</span><span class="detail-value">${p.no_whatsapp}</span></div>
           <div class="detail-field"><span class="detail-label">Layanan</span><span class="detail-value">${p.layanan}</span></div>
+          <div class="detail-field"><span class="detail-label">Tipe Kunjungan</span><span class="detail-value">
+            ${(p.tipe_kunjungan === 'Home Care') ? '<span class="badge badge-warning">Home Care</span>' : 'Klinik'}
+          </span></div>
           <div class="detail-field"><span class="detail-label">Keluhan Utama</span><span class="detail-value">${p.keluhan_utama}</span></div>
           <div class="detail-field"><span class="detail-label">Preferensi</span><span class="detail-value">${p.preferensi_hari} · ${p.preferensi_jam}</span></div>
           <div class="detail-field"><span class="detail-label">Terapis</span><span class="detail-value">${p.terapis||'-'}</span></div>
           <div class="detail-field"><span class="detail-label">Jadwal</span><span class="detail-value">${p.tanggal_jadwal?`${p.tanggal_jadwal} · ${p.jam_jadwal}`:'-'}</span></div>
+          
+          ${p.tipe_kunjungan === 'Home Care' ? `
+          <div class="detail-field" style="grid-column:1/-1;background:var(--color-bg-alt);padding:var(--space-3);border-radius:var(--radius-md);">
+            <div style="font-size:0.875rem;font-weight:600;margin-bottom:4px;">📍 Alamat & Lokasi Visit</div>
+            <div style="font-size:0.875rem;color:var(--color-text);margin-bottom:8px;">${p.alamat||'-'}</div>
+            ${(p.maps_url && p.maps_url !== '-') ? `<a href="${p.maps_url}" target="_blank" class="btn btn-primary btn-sm" style="display:inline-flex;">Buka Navigasi Google Maps</a>` : `<span style="font-size:0.875rem;color:var(--color-text-muted);">Koordinat: ${p.koordinat||'-'}</span>`}
+          </div>
+          ` : ''}
+
           <div class="detail-field" style="grid-column:1/-1;"><span class="detail-label">Catatan Terapi</span><span class="detail-value">${p.catatan_terapi||'-'}</span></div>
           ${p.follow_up?`<div class="detail-field" style="grid-column:1/-1;"><span class="detail-label">Follow-up</span><span class="detail-value">${p.follow_up}</span></div>`:''}
         </div>
