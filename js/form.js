@@ -146,7 +146,7 @@ const FormModule = (() => {
       keluhan_utama:   formData.keluhan_utama,
       preferensi_hari: formData.preferensi_hari,
       preferensi_jam:  formData.preferensi_jam,
-      status:          'Baru',
+      status:          'Menunggu Penjadwalan',
       tipe_kunjungan:  document.querySelector('input[name="tipe_kunjungan"]:checked')?.value || 'Klinik',
       alamat:          formData.alamat || '-',
       koordinat:       formData.lat && formData.lng ? `${formData.lat}, ${formData.lng}` : '-',
