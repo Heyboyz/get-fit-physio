@@ -1156,7 +1156,7 @@ const Dashboard = (() => {
             keluhan_utama: String(row['Keluhan Utama'] || ''),
             preferensi_hari: String(row['Preferensi Hari'] || ''),
             preferensi_jam: String(row['Preferensi Jam'] || ''),
-            status: String(row['Status'] || '') || 'Menunggu Penjadwalan',
+            status: (String(row['Status'] || '') === 'Baru' ? 'Menunggu Penjadwalan' : String(row['Status'] || '')) || 'Menunggu Penjadwalan',
             tipe_kunjungan: String(row['Tipe Kunjungan'] || '') || 'Klinik',
             alamat: String(row['Alamat Lengkap'] || '') || '-',
             koordinat: String(row['Koordinat'] || '') || '-',
