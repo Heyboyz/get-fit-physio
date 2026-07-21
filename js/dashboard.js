@@ -1130,20 +1130,20 @@ const Dashboard = (() => {
         
         if (serverData.data.raw_pasien) {
           window.GFP_PATIENTS = serverData.data.raw_pasien.map(row => ({
-            patient_id: row['ID Pasien'],
-            nama_pasien: row['Nama Pasien'],
-            umur: row['Umur'],
-            nama_orang_tua: row['Nama Orang Tua / Wali'],
-            no_whatsapp: row['WhatsApp'],
-            layanan: row['Layanan'],
-            keluhan_utama: row['Keluhan Utama'],
-            preferensi_hari: row['Preferensi Hari'],
-            preferensi_jam: row['Preferensi Jam'],
-            status: row['Status'] || 'Menunggu Penjadwalan',
-            tipe_kunjungan: row['Tipe Kunjungan'] || 'Klinik',
-            alamat: row['Alamat Lengkap'] || '-',
-            koordinat: row['Koordinat'] || '-',
-            maps_url: row['Google Maps Link'] || '-'
+            patient_id: String(row['ID Pasien'] || ''),
+            nama_pasien: String(row['Nama Pasien'] || ''),
+            umur: String(row['Umur'] || ''),
+            nama_orang_tua: String(row['Nama Orang Tua / Wali'] || ''),
+            no_whatsapp: String(row['WhatsApp'] || ''),
+            layanan: String(row['Layanan'] || ''),
+            keluhan_utama: String(row['Keluhan Utama'] || ''),
+            preferensi_hari: String(row['Preferensi Hari'] || ''),
+            preferensi_jam: String(row['Preferensi Jam'] || ''),
+            status: String(row['Status'] || '') || 'Menunggu Penjadwalan',
+            tipe_kunjungan: String(row['Tipe Kunjungan'] || '') || 'Klinik',
+            alamat: String(row['Alamat Lengkap'] || '') || '-',
+            koordinat: String(row['Koordinat'] || '') || '-',
+            maps_url: String(row['Google Maps Link'] || '') || '-'
           }));
         }
 
