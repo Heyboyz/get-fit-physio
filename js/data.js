@@ -327,7 +327,7 @@ function generatePatientId() {
     const n = parseInt(p.patient_id.split('-')[2]) || 0;
     return Math.max(mx, n);
   }, 0);
-  return \`GFP-\${year}-\${String(max + 1).padStart(3, '0')}\`;
+  return `GFP-${year}-${String(max + 1).padStart(3, '0')}`;
 }
 
 // ─── Helper: Format date (ID) ─────────────────────────────────────────────────
