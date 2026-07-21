@@ -11,8 +11,8 @@ const CONFIG = {
   REMINDER_WEBHOOK:   '', // e.g. Apps Script Gmail/WhatsApp webhook
   AUTH_ENDPOINT:      '', // e.g. backend auth endpoint
   CLINIC_NAME:        'Get Fit Physio',
-  CLINIC_PHONE:       '0812-3456-7890',
-  CLINIC_WA:          '6281234567890',
+  CLINIC_PHONE:       '08122759784',
+  CLINIC_WA:          '628122759784',
   CLINIC_EMAIL:       'info@getfitphysio.com',
   CLINIC_ADDRESS:     'Jl. Sehat No. 12, Jakarta Selatan',
   CLINIC_HOURS_WEEKDAY: '08.00 – 17.00',
